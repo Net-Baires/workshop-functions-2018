@@ -5,6 +5,10 @@ error configuration trigger http://prntscr.com/j6xd2x
 
 on-newpayment http://prntscr.com/j6xddv
 
+vs install
+http://prntscr.com/j6yk7u
+functions and webjobs tools http://prntscr.com/j6yklx
+
 
 ### codes
 
