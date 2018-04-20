@@ -12,15 +12,15 @@ Ademas se van a utilizar los siguientes servicios
 
 ## Instalación
 
+Para instalar el cli podemos descargarlo del siguiente [link](https://docs.microsoft.com/es-es/cli/azure/install-azure-cli?view=azure-cli-latest). Vamos a encontrar instrucciones para Windows, Mac y Linux.
+
 
 ## Introducción
 
-TODO INTRO
+TODO INTRO que vamos a contruir
 
-TODO Functions Image
-
-## Paso 1 crear Azure Storage Account
-Vamos a crear nuestra azure function desde el portal. Podemos seguir paso a paso el siguiente [articulo](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function) o sino podemos usar el cli de azure o de nuestra computadora para ejecutar este comando.
+## Paso 1 crear Azure Function y Storage Account
+Vamos a crear nuestra azure function desde el portal. Podemos seguir paso a paso el siguiente [articulo](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function) o sino podemos usar el cli de Azure o de nuestra computadora para ejecutar este comando.
 
 
 ```shell
@@ -31,7 +31,28 @@ az group create --name workshop --location eastus
 ```shell
 az storage account create --name wkstoragerand123 --location eastus --resource-group workshop2 --sku Standard_LRS
 ```
+
+```shell
+az functionapp create --resource-group workshop2 --consumption-plan-location eastus --name function1234112018 --storage-account  wkstoragerand123 
+```
+
 > Azure requiere tener nombres unidos por recurso agrupados por zonas. Si al crear el recurso da algún error cambien el name por otro
+
+Para mas información en las docs oficiales se explican mas detalles [link](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function-azure-cli)
+
+### Primera parte. Conociendo la interfaz Web y los bindings mas comunes
+
+### Ejercicio 1
+Vamos a crear una nueva function que responda a un pedido http e imprima un Hello World
+
+### Ejercicio 2
+Modificar la function anterior para leer datos desde un POST y retornar 200.
+
+### Ejercicio 3
+Almacenar el contenido del post en una mensaje que se va a transmitir por una cola para un procesamiento en diferido.
+
+### Ejercicio 4
+Recibir el mensaje de la cola y almacenarlo en Cosmos DB
 
 
 ### Listado de imagenes para colocar.
