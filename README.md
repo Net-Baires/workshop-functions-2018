@@ -63,7 +63,8 @@ public class NewPayment{
     public string Transaction {get;set;}
 }
 ```
-![Configuración para http trigger][ejer-1-config]
+Todo poner manana.
+[image](http://prntscr.com/j6xcuc)
 
 ### Crear recurso de CosmosDB
 Para terminar exitosamente el ejercicio 2. El wizard del portal de Functions nos va a pedir una conexión con CosmosDB para lo cual es recomendable hacerla previamente. Podemos seguir este tutoríal gráfico
@@ -239,5 +240,3 @@ public static async Task Run(NewPayment item, TraceWriter log, IAsyncCollector<N
   "disabled": false
 }
 ```
-
-[ejer-1-config]:http://prntscr.com/j6xcuc
