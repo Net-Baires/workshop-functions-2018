@@ -240,4 +240,4 @@ public static async Task Run(NewPayment item, TraceWriter log, IAsyncCollector<N
 }
 ```
 
-[ejer-1-config]:(http://prntscr.com/j6xcuc)
+[ejer-1-config]:http://prntscr.com/j6xcuc
