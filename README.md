@@ -1,3 +1,39 @@
+# workshop-functions
+
+## Requisitos
+Para el lab se requiere una cuenta de Azure y VisualStudio Community Edition.
+Ademas se van a utilizar los siguientes servicios
+- Cosmos DB
+- Azure Storage
+- Azure Cli
+- Azure Remote Cli
+- Sendgrid
+- Slack
+
+## Instalación
+
+
+## Introducción
+
+TODO INTRO
+
+TODO Functions Image
+
+## Paso 1 crear Azure Storage Account
+Vamos a crear nuestra azure function desde el portal. Podemos seguir paso a paso el siguiente [articulo](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function) o sino podemos usar el cli de azure o de nuestra computadora para ejecutar este comando.
+
+
+```shell
+az group create --name workshop --location eastus
+
+```
+
+```shell
+az storage account create --name wkstoragerand123 --location eastus --resource-group workshop2 --sku Standard_LRS
+```
+> Azure requiere tener nombres unidos por recurso agrupados por zonas. Si al crear el recurso da algún error cambien el name por otro
+
+
 ### Listado de imagenes para colocar.
 http trigger configuration portal http://prntscr.com/j6xcuc
 
@@ -147,21 +183,3 @@ public static async Task Run(NewPayment item, TraceWriter log, IAsyncCollector<N
   "disabled": false
 }
 ```
-
-# workshop-functions
-
-## Setup
-Para el lab se requiere una cuenta de azure y visual studio community edition.
-
-## Introducción
-
-TODO INTRO
-
-TODO Functions Image
-
-## Paso 1 crear Azure functions app
-
-- Abrir portal.azure.com
-- Click en nuevo
-- Escribir Function App
-- 
