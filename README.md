@@ -239,4 +239,5 @@ public static async Task Run(NewPayment item, TraceWriter log, IAsyncCollector<N
   "disabled": false
 }
 ```
+
 [ejer-1-config]:(http://prntscr.com/j6xcuc)
