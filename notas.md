@@ -1,4 +1,19 @@
 
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsDashboard": "",
+    "AzureWebJobsStorage": "",
+    "CosmosCollection": "payments",
+    "CosmosDB": "workshop",
+    "CosmosConnection": "",
+    "SengridKey": ""
+  }
+}
+
+```
+
 ### Segunda parte. 
 
 vs install
