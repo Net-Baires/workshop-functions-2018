@@ -3,6 +3,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.WindowsAzure.Storage.Blob;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,15 +14,6 @@ using System.Threading.Tasks;
 
 namespace Workshop
 {
-    public class NewPayment
-    {
-        public Guid Id { get; } = Guid.NewGuid();
-        public string Email { get; set; }
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public bool Valid { get; set; }
-        public string Transaction { get; set; }
-    }
 
     public static class Functions
     {
@@ -48,13 +40,27 @@ namespace Workshop
         }
 
         [FunctionName("on-error")]
-        public static void OnError(
+        public static async Task OnError(
             [QueueTrigger("payments-poison")] NewPayment errorPayment,
-            TraceWriter log
-            )
+            TraceWriter log,
+            [SendGrid(ApiKey = "SengridKey")]  IAsyncCollector<SendGridMessage> collector)
         {
-            //TODO llamar a slack
-            log.Warning($"Contact {errorPayment.Email} because there were an error on the payment with id {errorPayment.Id}");
+            var builder = new StringBuilder();
+            builder.AppendLine("German, El siguiente pago fue rechazado. Contactar la plataforma y al asistente.");
+            builder.AppendLine($"Email: {errorPayment.Email}");
+            builder.AppendLine($"Nombre: {errorPayment.Name}");
+            builder.AppendLine($"Apellido: {errorPayment.LastName}");
+            builder.AppendLine($"Transaccion: {errorPayment.Transaction}");
+
+            var mail = new SendGridMessage();
+
+            mail.AddTo("workshop2018@mailinator.com");
+            mail.AddContent("text/plain", builder.ToString());
+            mail.SetSubject("Pago Rechazado");
+            mail.SetFrom("info@netbaires.com");
+
+            await collector.AddAsync(mail);
+
         }
 
         [FunctionName("generate-ticket")]
