@@ -79,7 +79,7 @@ az cosmosdb create  --name cosmoswk2018 --kind GlobalDocumentDB --resource-group
 
 El asistente va a aprender a configurar un trigger con cola de mensajes y una salida con CosmosDB.
 
-Se requiere crear una nueva function que procese los mensajes que se almacenan en la cola de mensajes. La cola de mensajes se llama `payments`. Por ultimo se va a conectar con CosmosDB para guardar el mensaje de forma permanente.
+Se requiere crear una nueva function que procese los mensajes que se almacenan en la cola de mensajes. La cola de mensajes se llama `payments`. Por ultimo conectar con CosmosDB para guardar el mensaje de forma permanente.
 
 - Crear una function que utilice la cola de mensajes como trigger.
 - Mostrar por el log el email y el nombre que llega por el mensaje.
@@ -96,6 +96,56 @@ Los mensajes se reintentan 5 veces. Cuando la function falla la 5ta vez el mensa
 
 - Modificar la function del ejercicio 2 para lanzar una excepción en caso de que el pago no sea valido. Si el pago es valido guardarlo en CosmosDB.
 - Crear una function para procesar los mensajes inválidos y asociar el trigger a la cola payments-poison y el output a slack.
+
+## Ejercicios en Visual Studio
+
+### Introducción
+
+El asistente va a aprender como utilizar Visual Studio para programar Azure Functions. Visual Studio provee una nueva característica denominada *pre-compiled functions* que es la forma recomendada de administrar un proyecto functions en C#.
+
+- clonar el repositorio.
+- Abrir la solución src/inicial
+- Abrir el archivo Functions.cs
+- Que diferencias encontramos con el portal?
+- Que significa los atributos que decoran cada argumento de los métodos `RecievePayment, OnNewPayment, OnError`
+- Abrir el archivo de configuración local.settings.json y setear las variables definidas.
+
+Nombre | Descripción
+-------|-------------
+AzureWebJobsDashboard| Storage connection string para almacenar metadata sobre azure functions requeridas para el portal.
+AzureWebJobsStorage| Storage connection string por default para Queue, Table y Blob storage
+CosmosCollection| Nombre de la collecion de CosmosDB. Para el ejemplo usamos `payments`
+CosmosDB | Nombre de la base de datos de CosmosDB. Para le ejemplo usamos `workshop`
+CosmosConnection| Connection string de CosmosDB
+
+- Test local
+- Deploy usando Visual Studio
+
+
+### Ejercicio 4
+
+Se requiere crear una function para generar un ticket por cada registro almacenado en CosmosDB. La function debe utilizar el atributo correspondiente a CosmosDBTrigger para ser invocada cada vez que se ingresa un mensaje a la base de datos.
+
+El atributo para configurar un trigger de CosmosDB tiene los siguientes [parámetros](https://docs.microsoft.com/es-es/azure/azure-functions/functions-bindings-cosmosdb#trigger---c-example).
+
+```C#
+[CosmosDBTrigger(databaseName: "%CosmosDB%", collectionName: "%CosmosCollection%", ConnectionStringSetting = "CosmosConnection", CreateLeaseCollectionIfNotExists = true)]
+```
+
+Parametro | Descripcion
+------------ | -------------
+databaseName | nombre de la base de datos a conectar.
+collectionName | nombre de la coleccion a conectar.
+ConnectionStringSetting | setting que contiene la connection string.
+CreateLeaseCollectionIfNotExists | Flag que indica si hay que crear una collection lease para administrar el acceso concurrente entre instancias.
+
+> Functions permite utilizar string con formato `%SETTINGNAME%` para acceder a valores almacenados en la configuración. Por ej en el ejemplo anterior utilizamos `%CosmosDB%` que en la configuración hace referencia al valor `workshop`
+
+- Agregar un nuevo método `GenerateTicket` que se ejecuta cuando se guarda un registro en CosmosDB.
+- Generar un nuevo archivo que representa un ticket y guardarlo en Azure Blob Storage.
+- Crear un fork del repositorio en Github.
+- Configurar Azure para hacer deploy usando Github
+- Deploy usando push
 
 ### Segunda parte. 
 
@@ -240,4 +290,19 @@ public static async Task Run(NewPayment item, TraceWriter log, IAsyncCollector<N
   ],
   "disabled": false
 }
+```
+
+
+ Cada método debe decorarse con el atributo `FunctionName` para que se interprete como una Function.
+
+Por ejemplo un Hello world que se inicia cuando recibe un pedido get a la url /api/saludar
+
+```C#
+[FunctionName("saludar")]
+  public static HttpResponseMessage ProcesarSaludar(
+      [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]HttpRequestMessage req,
+      TraceWriter log)
+  {
+      return req.CreateResponse("Hello World");
+  }
 ```
