@@ -1,7 +1,7 @@
 	{
 		"AzureWebJobsDashboard" : "",
 		"AzureWebJobsStorage": "",
-		"CosmosCollection": "",
-		"CosmosDB": "",
+		"CosmosCollection": "payments",
+		"CosmosDB": "workshop",
 		"CosmosConnection": ""
 	}
