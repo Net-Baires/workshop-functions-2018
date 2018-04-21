@@ -26,7 +26,7 @@ El workshop requiere que el estudiante tengo como requisitos mínimos una cuenta
 
 
 ## 1) crear Azure Function y Storage Account
-El siguiente [articulo](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function) indica como crear una azure function desde el portal. Como alternativa se puede usar el cli de Azure desde el portal si se ingresan los siguientes comandos.
+El siguiente [articulo](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function) indica como crear una Azure function desde el portal. Como alternativa se puede usar el cli de Azure desde el portal si se ingresan los siguientes comandos.
 
 ```shell
 az group create --name workshop --location eastus
@@ -41,15 +41,12 @@ az storage account create --name wkstoragerand123 --location eastus --resource-g
 az functionapp create --resource-group workshop2 --consumption-plan-location eastus --name function1234112018 --storage-account  wkstoragerand123 
 ```
 
-> Azure requiere tener nombres únicos para los recursos. Si al crear el recurso da algún error cambien el name por otro
-
-Para mas información en las docs oficiales se explican mas detalles [link](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function-azure-cli)
+> Azure requiere tener nombres únicos para los recursos. Si al crear el recurso da algún error cambien el name por otro o pueden encontrar mas ayuda en el siguiente [link](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function-azure-cli)
 
 ## 2) Ejercicios en el portal.
 
 #### Ejercicio 1
-
-En el siguiente ejercicio vamos a crear la primer Function y la vamos a ir modificando para agregarle distintos inputs y outputs.
+El estudiante va a prender a crear una function y asignar bindings de entrada y de salida.
 
 - Crear una function que retorne como respuesta `hello World` y que acepte GET y POST
 - Cambiar la configuración para que solo acepte POST
@@ -68,8 +65,8 @@ public class NewPayment{
     public string Transaction {get;set;}
 }
 ```
-Todo poner manana.
-[image](http://prntscr.com/j6xcuc)
+
+![Configuracion](images/ejer-1-config.png)
 
 ### Crear recurso de CosmosDB
 Para terminar exitosamente el ejercicio 2. El wizard del portal de Functions nos va a pedir una conexión con CosmosDB para lo cual es recomendable hacerla previamente. Podemos seguir este tutoríal gráfico
