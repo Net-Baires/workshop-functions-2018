@@ -1,27 +1,32 @@
 # workshop-functions
 
-## Requisitos
-Para el lab se requiere una cuenta de Azure y VisualStudio Community Edition.
-Ademas se van a utilizar los siguientes servicios
+## Objetivo
+Azure functions es la plataforma Serverless de Microsoft que permite crear aplicaciones sencillas que se adaptan a la demanda. Permite al programador concentrarse en la lógica de negocio delegando a la plataforma responsabilidades como escalado y disponibilidad.
+
+El estudiante va a aprender a utilizar Azure Functions a través de una serie de ejercicios.Cada ejercicio tiene como va a presentar distintos conceptos relacionados a Azure Functions y las herramientas de trabajo relacionadas.
+
+Por medio de ejercicios prácticos se va a desarrollar una aplicación que permita generar un ticket para le ingreso a un evento luego de recibir el proceso de un pago proveniente de una fuente de terceros como puede ser Stripe o Paypal.
+
+En la practica se van a utilizar los siguientes servicios y herramientas
+
 - Cosmos DB
 - Azure Storage
-- Azure Cli
+- [Azure Cli](https://docs.microsoft.com/es-es/cli/azure/install-azure-cli?view=azure-cli-latest) 
 - Azure Remote Cli
 - Sendgrid
 - Slack
-
-## Instalación
-
-Para instalar el cli podemos descargarlo del siguiente [link](https://docs.microsoft.com/es-es/cli/azure/install-azure-cli?view=azure-cli-latest). Vamos a encontrar instrucciones para Windows, Mac y Linux.
+- Visual Studio Community Edition
 
 
-## Introducción
 
-TODO INTRO que vamos a contruir
 
-## Paso 1 crear Azure Function y Storage Account
-Vamos a crear nuestra azure function desde el portal. Podemos seguir paso a paso el siguiente [articulo](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function) o sino podemos usar el cli de Azure o de nuestra computadora para ejecutar este comando.
+## Requisitos
+El workshop requiere que el estudiante tengo como requisitos mínimos una cuenta en Azure y haya instalado Visual Studio Community Edition.
 
+
+
+## 1) crear Azure Function y Storage Account
+El siguiente [articulo](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function) indica como crear una azure function desde el portal. Como alternativa se puede usar el cli de Azure desde el portal si se ingresan los siguientes comandos.
 
 ```shell
 az group create --name workshop --location eastus
@@ -40,9 +45,9 @@ az functionapp create --resource-group workshop2 --consumption-plan-location eas
 
 Para mas información en las docs oficiales se explican mas detalles [link](https://docs.microsoft.com/es-es/azure/azure-functions/functions-create-first-azure-function-azure-cli)
 
-### Primera parte. Conociendo la interfaz Web y los bindings mas comunes
+## 2) Ejercicios en el portal.
 
-### Ejercicio 1
+#### Ejercicio 1
 
 En el siguiente ejercicio vamos a crear la primer Function y la vamos a ir modificando para agregarle distintos inputs y outputs.
 
